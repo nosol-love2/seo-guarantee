@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2EFE7">
+<title>검색 성과보장 신청서</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+:root{
+  --paper:#F2EFE7; --sheet:#FBFAF6; --sheet-2:#EDE9DF;
+  --ink:#0B1B2E; --ink-2:#40505F; --dim:#7E8894;
+  --rule:rgba(11,27,46,.14); --rule-2:rgba(11,27,46,.07);
+  --stamp:#B3271C; --stamp-soft:rgba(179,39,28,.08);
+  --mark:#F5E14B; --ok:#2C6B4F;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1B2E; --sheet:#122435; --sheet-2:#1A2E42;
+    --ink:#EDEAE2; --ink-2:#AEBAC6; --dim:#74838F;
+    --rule:rgba(255,255,255,.14); --rule-2:rgba(255,255,255,.07);
+    --stamp:#E8695A; --stamp-soft:rgba(232,105,90,.12);
+    --mark:#7A6A12; --ok:#6FBF95;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1B2E; --sheet:#122435; --sheet-2:#1A2E42;
+  --ink:#EDEAE2; --ink-2:#AEBAC6; --dim:#74838F;
+  --rule:rgba(255,255,255,.14); --rule-2:rgba(255,255,255,.07);
+  --stamp:#E8695A; --stamp-soft:rgba(232,105,90,.12);
+  --mark:#7A6A12; --ok:#6FBF95;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Inter','Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,'Noto Sans KR',sans-serif;
+  font-size:14px;line-height:1.5;letter-spacing:-.018em;-webkit-font-smoothing:antialiased;
+}
+input,select,textarea,button{font-family:inherit;letter-spacing:inherit}
+input[type="text"],input[type="tel"],input[type="url"]{font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
+#brn,#phone{font-family:'DM Sans','Pretendard',sans-serif}
+::-webkit-scrollbar{width:2px;height:2px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12)}
+::-webkit-scrollbar-button{display:none}
+::-webkit-scrollbar-corner{display:none}
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.12) transparent}}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+.ic{width:14px;height:14px;flex:none;vertical-align:-2px}
+
+.sheet{max-width:620px;margin:0 auto;background:var(--sheet);min-height:100vh;
+  border-left:1px solid var(--rule-2);border-right:1px solid var(--rule-2);padding:0 20px 40px}
+
+/* ── 헤드 ── */
+.hero{padding:34px 0 20px;border-bottom:2px solid var(--ink)}
+.hero h1{
+  margin:0 0 12px;font-weight:900;font-size:2.5rem;line-height:1.02;
+  letter-spacing:-.055em;text-wrap:balance
+}
+.hero h1 .r{display:block;color:var(--stamp);font-size:3.4rem;letter-spacing:-.06em;margin-top:2px}
+.hero .why{font-size:1rem;font-weight:600;letter-spacing:-.03em;margin:0 0 14px;color:var(--ink-2)}
+.terms{display:grid;gap:5px;margin-bottom:14px}
+.terms div{display:grid;grid-template-columns:14px 1fr;gap:7px;font-size:.86rem;align-items:start}
+.terms .ic{color:var(--stamp);margin-top:3px}
+.terms b{font-weight:700}
+.mark{background:linear-gradient(transparent 58%,var(--mark) 58%);padding:0 1px}
+.seal{
+  display:inline-block;border:2px solid var(--stamp);color:var(--stamp);border-radius:2px;
+  padding:5px 10px;font-size:.8rem;font-weight:700;letter-spacing:-.02em;transform:rotate(-1.2deg)
+}
+
+/* ── 폼 ── */
+.lead{padding:16px 0 4px;font-size:.84rem;color:var(--ink-2)}
+.lead b{color:var(--ink);font-weight:600}
+form{padding-top:8px}
+.f{padding:11px 0;border-bottom:1px solid var(--rule-2)}
+.f>label,.f .lb{display:block;font-size:.8rem;font-weight:600;margin-bottom:5px}
+.f .req{color:var(--stamp);margin-left:2px}
+.f .hint{display:block;font-weight:400;color:var(--dim);font-size:.7rem;margin-top:2px}
+input[type="text"],input[type="tel"],input[type="url"]{
+  width:100%;padding:8px 10px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--paper);color:var(--ink);font-size:.9rem
+}
+input::placeholder{color:var(--dim)}
+input:focus{border-color:var(--ink)}
+input[aria-invalid="true"]{border-color:var(--stamp);background:var(--stamp-soft)}
+.err{display:none;color:var(--stamp);font-size:.72rem;margin-top:4px}
+.err.on{display:block}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt span{
+  display:inline-block;padding:6px 12px;border:1px solid var(--rule);border-radius:2px;
+  font-size:.82rem;cursor:pointer;background:var(--paper)
+}
+.opt input:checked+span{border-color:var(--ink);background:var(--ink);color:var(--sheet);font-weight:600}
+.opt input:focus-visible+span{outline:2px solid var(--stamp);outline-offset:2px}
+#urlWrap{display:none;margin-top:8px}
+#urlWrap.on{display:block}
+.check{display:grid;grid-template-columns:16px 1fr;gap:8px;align-items:start;font-size:.8rem;padding:9px 0}
+.check input{margin:2px 0 0}
+.check .sub{color:var(--dim);font-size:.72rem;display:block;margin-top:2px}
+.price{background:var(--sheet-2);border:1px solid var(--rule);border-radius:2px;padding:10px 12px;margin-top:12px}
+.price p{margin:0 0 2px;font-size:.84rem;font-weight:600}
+.price .n{color:var(--stamp);font-weight:800}
+.slot{background:var(--stamp-soft);border:1px dashed var(--stamp);border-radius:2px;padding:8px 10px;font-size:.74rem;color:var(--stamp)}
+button.submit{
+  width:fit-content;margin-top:18px;padding:11px 20px;border:0;border-radius:2px;
+  background:var(--ink);color:var(--sheet);font-size:.92rem;font-weight:700;letter-spacing:-.02em;cursor:pointer
+}
+button.submit:hover{background:var(--stamp)}
+button.submit:disabled{opacity:.5;cursor:not-allowed}
+.after{margin-top:12px;font-size:.78rem;color:var(--dim)}
+#reject{display:none;border:2px solid var(--stamp);border-radius:2px;padding:14px 16px;margin-top:16px}
+#reject.on{display:block}
+#reject h2{margin:0 0 6px;font-size:1rem;color:var(--stamp)}
+#reject p{margin:0 0 6px;font-size:.84rem;color:var(--ink-2)}
+#reject b{color:var(--ink)}
+#done{display:none;border:2px solid var(--ok);border-radius:2px;padding:14px 16px;margin-top:16px}
+#done.on{display:block}
+#done h2{margin:0 0 6px;font-size:1rem;color:var(--ok)}
+#done p{margin:0 0 4px;font-size:.84rem;color:var(--ink-2)}
+#dump{width:100%;margin-top:10px;font-size:.72rem;font-family:ui-monospace,monospace;
+  border:1px solid var(--rule);border-radius:2px;padding:8px;background:var(--paper);color:var(--ink-2);min-height:150px}
+
+.fine{margin-top:22px;padding-top:12px;border-top:1px solid var(--rule);font-size:.68rem;color:var(--dim);line-height:1.55}
+.fine b{color:var(--ink-2);font-weight:600}
+.fine p{margin:0 0 6px}
+.ptbl{display:grid;gap:3px;margin:4px 0 8px}
+.ptbl div{display:grid;grid-template-columns:88px 1fr;gap:8px;background:var(--sheet-2);border-radius:2px;padding:5px 8px}
+.ptbl span{color:var(--ink-2);font-weight:600}
+@media (max-width:600px){.ptbl div{grid-template-columns:1fr;gap:1px}}
+
+@media (max-width:600px){
+  body{font-size:13px}
+  .sheet{padding:0 15px 32px}
+  .hero{padding:26px 0 18px}
+  .hero h1{font-size:1.9rem}
+  .hero h1 .r{font-size:2.5rem}
+  .hero .why{font-size:.9rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="sheet">
+
+  <div class="hero">
+    <h1>검색순위<br>안 오르면<span class="r">100% 환불</span></h1>
+    <p class="why">홈페이지, 만들기만 하면 뭐합니까. 고객이 검색했을 때 나와야죠.</p>
+    <div class="terms">
+      <div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span>검색순위 안 오르면 <b class="mark">SEO 비용 100% 환불</b></span>
+      </div>
+      <div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span>같은 업종은 <b>2곳까지만</b> 받습니다</span>
+      </div>
+      <div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span>보장 대상 키워드와 기준 순위, 측정 방식은 <b>계약 전에 숫자로 확정</b>합니다</span>
+      </div>
+    </div>
+    <span class="seal">실제 영업 중인 사업자 전용</span>
+  </div>
+
+  <p class="lead">
+    <b>검색으로 문의가 들어오지 않아 답답한 곳만 신청해 주세요.</b>
+    사업자 확인 후 검색환경을 검토하여, 진행 가능한 업체에 한해 견적을 안내드립니다.
+    모든 신청에 견적을 드리지는 않습니다 &mdash; 제가 성과조건을 걸 수 있다고 판단한 곳만 연락드립니다.
+  </p>
+
+  <form id="f" novalidate>
+
+    <div class="f">
+      <label for="biz">사업자명 / 상호명<span class="req">*</span></label>
+      <input type="text" id="biz" name="biz" autocomplete="organization" placeholder="예) 한빛설비">
+      <p class="err" id="e-biz">상호명을 입력해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="brn">사업자등록번호<span class="req">*</span>
+        <span class="hint">숫자 10자리. 사업자등록번호가 없는 경우 신청할 수 없습니다.</span>
+      </label>
+      <input type="text" id="brn" name="brn" inputmode="numeric" maxlength="12" placeholder="000-00-00000">
+      <p class="err" id="e-brn">사업자등록번호를 다시 확인해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="name">대표자 또는 담당자명<span class="req">*</span></label>
+      <input type="text" id="name" name="name" autocomplete="name" placeholder="예) 김철수">
+      <p class="err" id="e-name">성함을 입력해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="industry">업종<span class="req">*</span>
+        <span class="hint">같은 업종이 이미 진행 중이면 이번 회차에는 받지 못합니다.</span>
+      </label>
+      <input type="text" id="industry" name="industry" placeholder="예) 시스템에어컨 설치">
+      <p class="err" id="e-industry">업종을 입력해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="region">주요 영업지역<span class="req">*</span>
+        <span class="hint">실제로 고객을 받을 수 있는 지역으로 적어 주세요.</span>
+      </label>
+      <input type="text" id="region" name="region" placeholder="예) 평택, 안성">
+      <p class="err" id="e-region">영업지역을 입력해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="service">가장 고객을 늘리고 싶은 상품 / 서비스<span class="req">*</span></label>
+      <input type="text" id="service" name="service" placeholder="예) 신축 아파트 시스템에어컨 설치">
+      <p class="err" id="e-service">한 가지만 적어 주세요.</p>
+    </div>
+
+    <div class="f">
+      <span class="lb">지금 &ldquo;지역 + 업종&rdquo;으로 검색하면 몇 번째에 나오나요?<span class="req">*</span>
+        <span class="hint">모르시면 지금 한번 검색해 보셔도 됩니다.</span>
+      </span>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="rank" value="1페이지 안"><span>1페이지 안</span></label>
+        <label class="opt"><input type="radio" name="rank" value="2페이지 이후"><span>2페이지 이후</span></label>
+        <label class="opt"><input type="radio" name="rank" value="아예 안 나옴"><span>아예 안 나옴</span></label>
+        <label class="opt"><input type="radio" name="rank" value="모르겠음"><span>모르겠음</span></label>
+      </div>
+      <p class="err" id="e-rank">하나를 선택해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <span class="lb">검색으로 들어오는 문의가 한 달에 몇 건인가요?<span class="req">*</span></span>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="inquiry" value="0건"><span>0건</span></label>
+        <label class="opt"><input type="radio" name="inquiry" value="1~5건"><span>1~5건</span></label>
+        <label class="opt"><input type="radio" name="inquiry" value="6~20건"><span>6~20건</span></label>
+        <label class="opt"><input type="radio" name="inquiry" value="20건 이상"><span>20건 이상</span></label>
+      </div>
+      <p class="err" id="e-inquiry">하나를 선택해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <span class="lb">검색광고(파워링크 등)를 집행하고 계신가요?<span class="req">*</span></span>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="ads" value="집행 중"><span>집행 중</span></label>
+        <label class="opt"><input type="radio" name="ads" value="해봤다가 중단"><span>해봤다가 중단</span></label>
+        <label class="opt"><input type="radio" name="ads" value="해본 적 없음"><span>해본 적 없음</span></label>
+      </div>
+      <p class="err" id="e-ads">하나를 선택해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <span class="lb">현재 홈페이지가 있나요?<span class="req">*</span></span>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="hassite" value="있음"><span>있음</span></label>
+        <label class="opt"><input type="radio" name="hassite" value="없음 / 신규 제작"><span>없음 · 신규 제작</span></label>
+      </div>
+      <div id="urlWrap">
+        <label for="url" class="lb" style="margin-top:8px">홈페이지 주소</label>
+        <input type="url" id="url" name="url" inputmode="url" placeholder="example.co.kr">
+      </div>
+      <p class="err" id="e-hassite">하나를 선택해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label for="phone">연락 가능한 휴대전화<span class="req">*</span></label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="13" placeholder="010-0000-0000">
+      <p class="err" id="e-phone">휴대전화 번호를 확인해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <span class="lb">홈페이지 제작을 검토하는 시기<span class="req">*</span></span>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="timing" value="바로 진행 가능"><span>바로 진행 가능</span></label>
+        <label class="opt"><input type="radio" name="timing" value="1개월 이내"><span>1개월 이내</span></label>
+        <label class="opt"><input type="radio" name="timing" value="3개월 이내"><span>3개월 이내</span></label>
+        <label class="opt"><input type="radio" name="timing" value="정보수집 중"><span>아직 정보수집 중</span></label>
+      </div>
+      <p class="err" id="e-timing">하나를 선택해 주세요.</p>
+    </div>
+
+    <div class="price">
+      <p>예상 제작비 범위</p>
+      <p>본 상품은 <span class="n" id="minPrice">○○○만원</span>부터 시작합니다.</p>
+      <label class="check">
+        <input type="checkbox" id="agreePrice">
+        <span>확인했습니다.<span class="sub">가격대가 맞지 않는 상담을 서로 줄이기 위한 확인입니다.</span></span>
+      </label>
+      <p class="err" id="e-agreePrice">확인란에 체크해 주세요.</p>
+    </div>
+
+    <div class="f">
+      <label class="check">
+        <input type="checkbox" id="agreePrivacy">
+        <span>견적 및 상담을 위한 개인정보 수집·이용에 동의합니다.<span class="sub" id="privacyText">수집 항목: 상호명 · 사업자등록번호 · 담당자명 · 휴대전화번호 · 업종 · 영업지역 · 주력 서비스 · 홈페이지 주소 · 검색 현황 응답<br>
+      이용 목적: 신청 자격 확인, 검색환경 검토, 견적 안내 및 상담 연락<br>
+      보유 기간: 동의일로부터 1년 (목적 달성 시 즉시 파기) &mdash; 자세한 내용은 아래 &lsquo;개인정보 수집·이용 안내&rsquo; 참조<br>
+      동의를 거부하실 수 있으며, 거부 시 견적 안내와 상담이 제공되지 않습니다.</span></span>
+      </label>
+      <p class="err" id="e-agreePrivacy">동의가 필요합니다.</p>
+    </div>
+
+    <button type="submit" class="submit">내 업종 자리 확인</button>
+    <p class="after">자리가 남아 있고 조건이 맞으면 문자로 먼저 연락드립니다. 확인만 하셔도 됩니다.</p>
+  </form>
+
+  <div id="reject">
+    <h2>이번 회차 대상이 아닙니다</h2>
+    <p id="rejectWhy"></p>
+    <p>지금은 <b>검색으로 문의가 막혀 있는 곳</b>만 받고 있습니다. 상황이 달라지면 그때 다시 신청해 주세요.</p>
+  </div>
+
+  <div id="done">
+    <h2>접수되었습니다</h2>
+    <p>검색환경을 검토한 뒤, 진행 가능한 경우 문자로 먼저 연락드리겠습니다.</p>
+    <p id="dumpNote" style="color:var(--stamp)"></p>
+    <textarea id="dump" readonly aria-label="접수 내용"></textarea>
+  </div>
+
+  <div class="fine">
+    <p><b>보장 조건 안내</b> &mdash; 보장 대상 키워드, 기준 순위, 목표, 측정 기간, 측정 도구와 지역·기기는 계약 전에 협의하여 확정합니다.
+    검색광고 영역은 측정에서 제외하며, 검색엔진 정책·알고리즘 변경 등 통제 불가능한 요인과 고객 협조 사항은 별도 약관을 따릅니다.
+    특정 검색엔진의 순위를 무조건 보장하지 않으며, 사전에 합의한 성과기준 미달 시 SEO 비용을 환불하는 방식입니다.</p>
+    <p><b>환불 기준</b> &mdash; 금액은 홈페이지 제작비와 SEO 패키지로 구분되며, 성과기준 미달 시 SEO 패키지 금액 전액을 약정한 기일 내 환불합니다.
+    제작된 홈페이지는 고객 자산으로 남습니다.</p>
+    <p><b>개인정보 수집·이용 안내</b></p>
+    <div class="ptbl">
+      <div><span>수집 항목</span>상호명, 사업자등록번호, 대표자 또는 담당자명, 휴대전화번호, 업종, 주요 영업지역, 주력 상품·서비스, 홈페이지 주소(있는 경우), 검색 노출 현황 및 검토 시기에 대한 응답</div>
+      <div><span>이용 목적</span>신청 자격 확인, 검색환경 검토 및 진행 가능 여부 판단, 견적 안내와 상담을 위한 연락</div>
+      <div><span>보유·이용 기간</span>동의일로부터 1년. 목적이 달성되거나 정보주체가 파기를 요청하는 경우 지체 없이 파기합니다. 계약이 체결된 경우에는 관계 법령에서 정한 기간 동안 보관합니다.</div>
+      <div><span>제3자 제공</span>제공하지 않습니다. 위탁하는 업무도 없습니다.</div>
+      <div><span>동의 거부 권리</span>동의를 거부하실 권리가 있습니다. 다만 위 항목은 견적 안내에 반드시 필요한 정보이므로, 거부 시 견적 안내와 상담이 제공되지 않습니다.</div>
+      <div><span>열람·정정·삭제</span>아래 연락처로 요청하시면 지체 없이 처리합니다.</div>
+    </div>
+    <div class="slot" style="margin-top:8px">[개인정보 처리 책임자 &mdash; 이름 · 연락처 · 이메일. 그리고 사업자 정보(상호 · 대표자 · 사업자등록번호 · 주소). 확정 후 채운다]</div>
+  </div>
+</div>
+
+<script>
+/* ───────────────────────────────────────────────────────────
+   접수 엔드포인트. 비워두면 서버 없이 화면에서 결과만 보여준다(테스트 모드).
+   운영 전환: 아래 한 줄에 POST 받을 주소를 넣는다.
+   봇 토큰 등 비밀값은 절대 이 파일에 넣지 않는다 — 서버가 대신 텔레그램으로 쏜다.
+   ─────────────────────────────────────────────────────────── */
+const ENDPOINT = "";
+const MIN_PRICE = "150만원";   // 가격 확인 문구에 자동 반영
+
+if (MIN_PRICE) document.getElementById("minPrice").textContent = MIN_PRICE;
+
+const $ = (id) => document.getElementById(id);
+const form = $("f");
+
+/* 사업자등록번호 검증 — 자릿수 + 국세청 체크섬 */
+function validBRN(v) {
+  const d = (v || "").replace(/\D/g, "");
+  if (d.length !== 10) return false;
+  if (/^(\d)\1{9}$/.test(d)) return false;   // 000-00-00000 류는 체크섬을 통과하므로 따로 막는다
+  const w = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += Number(d[i]) * w[i];
+  sum += Math.floor((Number(d[8]) * 5) / 10);
+  return (10 - (sum % 10)) % 10 === Number(d[9]);
+}
+
+/* 입력 중 자동 하이픈 */
+function maskBRN(v) {
+  const d = v.replace(/\D/g, "").slice(0, 10);
+  if (d.length < 4) return d;
+  if (d.length < 6) return d.slice(0, 3) + "-" + d.slice(3);
+  return d.slice(0, 3) + "-" + d.slice(3, 5) + "-" + d.slice(5);
+}
+function maskPhone(v) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length < 4) return d;
+  if (d.length < 8) return d.slice(0, 3) + "-" + d.slice(3);
+  return d.slice(0, 3) + "-" + d.slice(3, 7) + "-" + d.slice(7);
+}
+$("brn").addEventListener("input", (e) => { e.target.value = maskBRN(e.target.value); });
+$("phone").addEventListener("input", (e) => { e.target.value = maskPhone(e.target.value); });
+
+/* 홈페이지 있음 선택 시 주소 칸 노출 */
+form.addEventListener("change", (e) => {
+  if (e.target.name === "hassite") {
+    $("urlWrap").classList.toggle("on", e.target.value === "있음");
+  }
+});
+
+function fail(key, on) {
+  const el = $("e-" + key);
+  if (el) el.classList.toggle("on", on);
+  const input = $(key);
+  if (input) input.setAttribute("aria-invalid", on ? "true" : "false");
+  return !on;
+}
+
+function radio(name) {
+  const el = form.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : "";
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  let ok = true;
+  ["biz", "name", "industry", "region", "service"].forEach((k) => {
+    ok = fail(k, !$(k).value.trim()) && ok;
+  });
+  ok = fail("brn", !validBRN($("brn").value)) && ok;
+  ok = fail("phone", $("phone").value.replace(/\D/g, "").length < 10) && ok;
+  ok = fail("rank", !radio("rank")) && ok;
+  ok = fail("inquiry", !radio("inquiry")) && ok;
+  ok = fail("ads", !radio("ads")) && ok;
+  ok = fail("hassite", !radio("hassite")) && ok;
+  ok = fail("timing", !radio("timing")) && ok;
+  ok = fail("agreePrice", !$("agreePrice").checked) && ok;
+  ok = fail("agreePrivacy", !$("agreePrivacy").checked) && ok;
+  if (!ok) {
+    const first = form.querySelector('[aria-invalid="true"], .err.on');
+    if (first) first.scrollIntoView({ block: "center", behavior: "smooth" });
+    return;
+  }
+
+  const data = {
+    받은시각: new Date().toLocaleString("ko-KR"),
+    상호명: $("biz").value.trim(),
+    사업자등록번호: $("brn").value.trim(),
+    담당자: $("name").value.trim(),
+    업종: $("industry").value.trim(),
+    영업지역: $("region").value.trim(),
+    주력서비스: $("service").value.trim(),
+    검색순위: radio("rank"),
+    월검색문의: radio("inquiry"),
+    검색광고: radio("ads"),
+    홈페이지: radio("hassite"),
+    주소: $("url").value.trim(),
+    휴대전화: $("phone").value.trim(),
+    검토시기: radio("timing"),
+    가격확인: true,
+    개인정보동의: true
+  };
+
+  // 간절함 점수 — 통화 우선순위를 정하는 내부 값(고객에게는 보이지 않는다)
+  const P = {
+    rank: { "아예 안 나옴": 3, "2페이지 이후": 3, "모르겠음": 1, "1페이지 안": 0 },
+    inquiry: { "0건": 3, "1~5건": 2, "6~20건": 1, "20건 이상": 0 },
+    ads: { "집행 중": 3, "해봤다가 중단": 2, "해본 적 없음": 0 },
+    timing: { "바로 진행 가능": 3, "1개월 이내": 2, "3개월 이내": 1, "정보수집 중": 0 }
+  };
+  data.간절함점수 =
+    (P.rank[data.검색순위] || 0) + (P.inquiry[data.월검색문의] || 0) +
+    (P.ads[data.검색광고] || 0) + (P.timing[data.검토시기] || 0);
+
+  // ── 하드 게이트: 간절하지 않은 신청은 여기서 반려한다
+  const 잘나옴 = data.검색순위 === "1페이지 안";
+  const 문의많음 = data.월검색문의 === "6~20건" || data.월검색문의 === "20건 이상";
+  let 반려 = null;
+  if (잘나옴 && 문의많음) {
+    반려 = "이미 검색 1페이지에 있고 문의도 들어오고 있습니다. 지금 손볼 자리가 크지 않습니다.";
+  } else if (data.검토시기 === "정보수집 중" && data.검색광고 === "해본 적 없음") {
+    반려 = "아직 검색에 예산을 써보신 적이 없고 시기도 정해지지 않았습니다.";
+  } else if (data.간절함점수 < 5) {
+    반려 = "지금은 검색 쪽이 급한 상황으로 보이지 않습니다.";
+  }
+  if (반려) {
+    document.getElementById("rejectWhy").textContent = 반려;
+    form.style.display = "none";
+    const r = document.getElementById("reject");
+    r.classList.add("on");
+    r.scrollIntoView({ block: "start", behavior: "smooth" });
+    return;
+  }
+
+  const btn = form.querySelector("button.submit");
+  btn.disabled = true;
+
+  if (ENDPOINT) {
+    try {
+      await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      $("dumpNote").textContent = "전송에 실패했습니다. 아래 내용을 복사해 문자로 보내주셔도 됩니다.";
+    }
+  } else {
+    $("dumpNote").textContent = "테스트 모드 — 접수처가 아직 연결되지 않았습니다. 아래가 실제로 전송될 내용입니다.";
+  }
+
+  $("dump").value = Object.entries(data)
+    .filter(([, v]) => v !== "" && v !== false)
+    .map(([k, v]) => k + ": " + v).join("\n");
+  form.style.display = "none";
+  $("done").classList.add("on");
+  $("done").scrollIntoView({ block: "start", behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>
