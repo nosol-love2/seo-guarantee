@@ -122,6 +122,15 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
 #done.on{display:block}
 #done h2{margin:0 0 6px;font-size:1rem;color:var(--ok)}
 #done p{margin:0 0 4px;font-size:.84rem;color:var(--ink-2)}
+.sendbtn{
+  display:inline-block;background:var(--ink);color:var(--sheet);text-decoration:none;
+  padding:10px 18px;border-radius:2px;font-size:.9rem;font-weight:700;letter-spacing:-.02em;width:fit-content
+}
+.sendbtn:hover{background:var(--stamp)}
+.copybtn{
+  width:fit-content;padding:5px 11px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--paper);color:var(--ink-2);font-size:.74rem;font-weight:600;cursor:pointer
+}
 #dump{width:100%;margin-top:10px;font-size:.72rem;font-family:ui-monospace,monospace;
   border:1px solid var(--rule);border-radius:2px;padding:8px;background:var(--paper);color:var(--ink-2);min-height:150px}
 
@@ -315,9 +324,13 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
 
   <div id="done">
     <h2>접수되었습니다</h2>
-    <p>검색환경을 검토한 뒤, 진행 가능한 경우 문자로 먼저 연락드리겠습니다.</p>
+    <p id="doneP">검색환경을 검토한 뒤, 진행 가능한 경우 문자로 먼저 연락드리겠습니다.</p>
+    <p id="sendWrap"><a id="sendBtn" class="sendbtn" href="#">문자로 접수 보내기</a></p>
     <p id="dumpNote" style="color:var(--stamp)"></p>
-    <textarea id="dump" readonly aria-label="접수 내용"></textarea>
+    <div id="dumpWrap">
+      <button type="button" id="copyBtn" class="copybtn">접수 내용 복사</button>
+      <textarea id="dump" readonly aria-label="접수 내용"></textarea>
+    </div>
   </div>
 
   <div class="fine">
@@ -345,8 +358,9 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
    운영 전환: 아래 한 줄에 POST 받을 주소를 넣는다.
    봇 토큰 등 비밀값은 절대 이 파일에 넣지 않는다 — 서버가 대신 텔레그램으로 쏜다.
    ─────────────────────────────────────────────────────────── */
-const ENDPOINT = "";
-const MIN_PRICE = "150만원";   // 가격 확인 문구에 자동 반영
+const ENDPOINT = "";        // 서버가 생기면 여기에 POST 주소 한 줄
+const LEAD_PHONE = "";      // 서버가 없을 때 접수받을 휴대폰 번호 (예: "01012345678")
+const MIN_PRICE = "150만원"; // 가격 확인 문구에 자동 반영
 
 if (MIN_PRICE) document.getElementById("minPrice").textContent = MIN_PRICE;
 
@@ -475,6 +489,12 @@ form.addEventListener("submit", async (e) => {
   const btn = form.querySelector("button.submit");
   btn.disabled = true;
 
+  const body = Object.entries(data)
+    .filter(([k, v]) => v !== "" && v !== false && k !== "간절함점수")
+    .map(([k, v]) => k + ": " + v).join("\n");
+  $("dump").value = body;
+
+  let sent = false;
   if (ENDPOINT) {
     try {
       await fetch(ENDPOINT, {
@@ -482,19 +502,38 @@ form.addEventListener("submit", async (e) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
+      sent = true;
     } catch (err) {
-      $("dumpNote").textContent = "전송에 실패했습니다. 아래 내용을 복사해 문자로 보내주셔도 됩니다.";
+      sent = false;
     }
-  } else {
-    $("dumpNote").textContent = "테스트 모드 — 접수처가 아직 연결되지 않았습니다. 아래가 실제로 전송될 내용입니다.";
   }
 
-  $("dump").value = Object.entries(data)
-    .filter(([, v]) => v !== "" && v !== false)
-    .map(([k, v]) => k + ": " + v).join("\n");
   form.style.display = "none";
   $("done").classList.add("on");
+
+  if (sent) {
+    $("sendWrap").style.display = "none";
+    $("dumpWrap").style.display = "none";
+  } else if (LEAD_PHONE) {
+    // 서버가 없을 때 — 문자 앱을 내용 채워서 연다. iOS 와 안드로이드의 구분자가 다르다
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const sep = ios ? "&" : "?";
+    $("sendBtn").href = "sms:" + LEAD_PHONE + sep + "body=" + encodeURIComponent(body);
+    $("doneP").textContent = "마지막 한 번만 눌러 주세요. 문자 앱이 열리면 그대로 보내시면 접수됩니다.";
+  } else {
+    $("sendWrap").style.display = "none";
+    $("dumpNote").textContent = "접수처가 아직 연결되지 않았습니다(테스트). 아래가 전송될 내용입니다.";
+  }
   $("done").scrollIntoView({ block: "start", behavior: "smooth" });
+});
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("dump").value);
+    document.getElementById("copyBtn").textContent = "복사됨";
+  } catch (e) {
+    $("dump").select();
+  }
 });
 </script>
 
