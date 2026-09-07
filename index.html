@@ -358,7 +358,7 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
    운영 전환: 아래 한 줄에 POST 받을 주소를 넣는다.
    봇 토큰 등 비밀값은 절대 이 파일에 넣지 않는다 — 서버가 대신 텔레그램으로 쏜다.
    ─────────────────────────────────────────────────────────── */
-const ENDPOINT = "";        // 서버가 생기면 여기에 POST 주소 한 줄
+const ENDPOINT = "https://coastal-fcc-lance-creations.trycloudflare.com/api/seo-lead";        // 서버가 생기면 여기에 POST 주소 한 줄
 const LEAD_PHONE = "";      // 서버가 없을 때 접수받을 휴대폰 번호 (예: "01012345678")
 const MIN_PRICE = "150만원"; // 가격 확인 문구에 자동 반영
 
@@ -366,6 +366,30 @@ if (MIN_PRICE) document.getElementById("minPrice").textContent = MIN_PRICE;
 
 const $ = (id) => document.getElementById(id);
 const form = $("f");
+
+/* 유입 소재 추적 — 이 신청이 어느 광고에서 왔는지.
+   광고 링크에 붙은 utm_* 을 처음 들어온 순간에 잡아 세션에 넣어둔다.
+   중간에 다른 페이지를 거쳐 돌아와도 첫 유입이 유지된다(마지막 클릭이 아니라 첫 접점 기준).
+   이게 비면 소재별 적격단가를 낼 수 없다 — 소재 허브(engine/creatives.py)의 입력이다. */
+const UTM = (() => {
+  const KEY = "solcap_utm";
+  const q = new URLSearchParams(location.search);
+  const now = {
+    캠페인: q.get("utm_campaign") || "",
+    소재: q.get("utm_content") || "",
+    매체: q.get("utm_medium") || "",
+    출처: q.get("utm_source") || ""
+  };
+  try {
+    if (now.소재 || now.캠페인) {
+      sessionStorage.setItem(KEY, JSON.stringify(now));
+      return now;
+    }
+    const saved = sessionStorage.getItem(KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) { /* 시크릿 모드 등 저장 불가 — 이번 방문 값만 쓴다 */ }
+  return now;
+})();
 
 /* 사업자등록번호 검증 — 자릿수 + 국세청 체크섬 */
 function validBRN(v) {
@@ -452,7 +476,9 @@ form.addEventListener("submit", async (e) => {
     휴대전화: $("phone").value.trim(),
     검토시기: radio("timing"),
     가격확인: true,
-    개인정보동의: true
+    개인정보동의: true,
+    유입캠페인: UTM.캠페인,
+    유입소재: UTM.소재
   };
 
   // 간절함 점수 — 통화 우선순위를 정하는 내부 값(고객에게는 보이지 않는다)
@@ -478,6 +504,16 @@ form.addEventListener("submit", async (e) => {
     반려 = "지금은 검색 쪽이 급한 상황으로 보이지 않습니다.";
   }
   if (반려) {
+    /* 반려도 신청이다. 기록하지 않으면 소재별 적격률의 분모가 비어,
+       "신청은 많은데 자격 없는 사람만 부르는 소재"를 영영 못 잡는다. */
+    if (ENDPOINT) {
+      const 반려기록 = Object.assign({}, data, { 게이트: "반려", 반려사유: 반려 });
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(반려기록)
+      }).catch(() => { /* 반려 기록 실패가 화면을 막지 않는다 */ });
+    }
     document.getElementById("rejectWhy").textContent = 반려;
     form.style.display = "none";
     const r = document.getElementById("reject");
