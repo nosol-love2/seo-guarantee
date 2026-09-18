@@ -5,12 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F2EFE7">
-<title>검색 성과보장 신청서</title>
+<title>기존 홈페이지 검색 개선 신청 | 첫번째스튜디오</title>
+<meta name="description" content="지금 쓰는 홈페이지를 그대로 두고 검색 노출만 개선합니다. 계약 전에 정한 검색어 순위가 안 오르면 전액 환불합니다. 디자인 개선은 이후 추가금으로 진행합니다.">
+<meta name="author" content="첫번째스튜디오">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="첫번째스튜디오">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="기존 홈페이지 검색 개선 | 첫번째스튜디오">
+<meta property="og:description" content="안 오르면 전액 환불. 홈페이지는 그대로 두고 검색만 손봅니다. 60만원부터.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
 <style>
 :root{
   --paper:#F2EFE7; --sheet:#FBFAF6; --sheet-2:#EDE9DF;
-  --ink:#0B1B2E; --ink-2:#40505F; --dim:#7E8894;
+  --ink:#0B1B2E; --ink-2:#40505F; --dim:#5C6672;
   --rule:rgba(11,27,46,.14); --rule-2:rgba(11,27,46,.07);
   --stamp:#B3271C; --stamp-soft:rgba(179,39,28,.08);
   --mark:#F5E14B; --ok:#2C6B4F;
@@ -102,12 +110,57 @@ input[aria-invalid="true"]{border-color:var(--stamp);background:var(--stamp-soft
 .check{display:grid;grid-template-columns:16px 1fr;gap:8px;align-items:start;font-size:.8rem;padding:9px 0}
 .check input{margin:2px 0 0}
 .check .sub{color:var(--dim);font-size:.72rem;display:block;margin-top:2px}
+.calc{margin-top:10px;border-top:1px solid var(--rule);padding-top:8px}
+.calc summary{font-size:.74rem;font-weight:600;color:var(--ink-2);cursor:pointer;list-style:none}
+.calc summary::-webkit-details-marker{display:none}
+.calc summary::before{content:"";display:inline-block;width:0;height:0;margin-right:6px;vertical-align:1px;
+  border-left:4px solid currentColor;border-top:3px solid transparent;border-bottom:3px solid transparent;transition:transform .15s}
+.calc[open] summary::before{transform:rotate(90deg)}
+.ctbl{display:grid;gap:2px;margin-top:8px}
+.ctbl div{display:grid;grid-template-columns:132px 1fr 82px;gap:8px;align-items:baseline;
+  background:var(--paper);border-radius:2px;padding:5px 8px;font-size:.68rem;line-height:1.4}
+.ctbl span{font-weight:600;color:var(--ink)}
+.ctbl i{font-style:normal;color:var(--ink-2)}
+.ctbl b{text-align:right;font-weight:700;color:var(--ink-2);font-feature-settings:'tnum';font-variant-numeric:tabular-nums}
+.ctbl .sum{background:var(--sheet-2);border-top:1px solid var(--rule)}
+.ctbl .sum b{color:var(--stamp);font-weight:800}
+.cnote{margin:6px 0 0;font-size:.66rem;color:var(--dim);font-weight:400}
+@media (max-width:600px){.ctbl div{grid-template-columns:1fr 80px}.ctbl i{grid-column:1 / -1}}
+
+form#f{display:grid;grid-template-columns:repeat(3,1fr);gap:0 14px;align-items:stretch}
+form#f>*{min-width:0}
+/* 힌트 길이가 달라도 입력칸 바닥을 맞춘다 */
+form#f>.f:not(.rowf){display:flex;flex-direction:column}
+form#f>.f:not(.rowf)>input{margin-top:auto}
+form#f>.wide,form#f>.price,form#f>button.submit,form#f>.after{grid-column:1 / -1}
+/* 라디오 묶음 — 라벨 왼쪽, 선택지 오른쪽. 한 줄에 끝낸다 */
+.f.rowf{display:grid;grid-template-columns:232px 1fr;gap:3px 14px;align-items:start}
+.f.rowf>label,.f.rowf>.lb{margin-bottom:0;align-self:center}
+.f.rowf>.opts,.f.rowf>#urlWrap,.f.rowf>.err{grid-column:2}
+.f.rowf .hint{margin-top:1px}
+/* 예상 비용 — 줄바꿈 없이 한 줄 */
+.price{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.price p{margin:0}
+.price .check{display:flex;align-items:center;gap:7px;padding:0;font-size:.8rem}
+.price .check>span{display:flex;align-items:baseline;gap:6px}
+.price .check .sub{display:inline;margin:0}
+.price .err{flex-basis:100%;margin:0}
+@media (max-width:1000px){form#f{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:680px){
+  form#f{grid-template-columns:1fr}
+  .f.rowf{grid-template-columns:1fr}
+  .f.rowf>.opts,.f.rowf>#urlWrap,.f.rowf>.err{grid-column:1}
+  .price{display:block}
+  .price .check{margin-top:6px}
+}
+
 .price{background:var(--sheet-2);border:1px solid var(--rule);border-radius:2px;padding:10px 12px;margin-top:12px}
 .price p{margin:0 0 2px;font-size:.84rem;font-weight:600}
 .price .n{color:var(--stamp);font-weight:800}
+.u{font-size:max(10px,.76em);font-weight:600;letter-spacing:-.01em}
 .slot{background:var(--stamp-soft);border:1px dashed var(--stamp);border-radius:2px;padding:8px 10px;font-size:.74rem;color:var(--stamp)}
 button.submit{
-  width:fit-content;margin-top:18px;padding:11px 20px;border:0;border-radius:2px;
+  width:100%;display:block;margin-top:18px;padding:13px 20px;border:0;border-radius:2px;
   background:var(--ink);color:var(--sheet);font-size:.92rem;font-weight:700;letter-spacing:-.02em;cursor:pointer
 }
 button.submit:hover{background:var(--stamp)}
@@ -144,42 +197,259 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
 
 @media (max-width:600px){
   body{font-size:13px}
-  .sheet{padding:0 15px 32px}
-  .hero{padding:26px 0 18px}
-  .hero h1{font-size:1.9rem}
-  .hero h1 .r{font-size:2.5rem}
-  .hero .why{font-size:.9rem}
+  .sheet{padding:0 14px 40px;border-left:0;border-right:0}
+  .hero{padding:22px 0 16px}
+  .hero h1{font-size:1.75rem;letter-spacing:-.045em}
+  .hero h1 .r{font-size:2.35rem}
+  .hero .why{font-size:.88rem}
+  .terms span{font-size:.8rem;line-height:1.5}
+
+  /* iOS 는 입력칸 글자가 16px 미만이면 포커스 때 화면을 확대한다. 그러면 폼이 튄다 */
+  input[type="text"],input[type="tel"],input[type="url"]{
+    font-size:16px;padding:11px 12px
+  }
+  /* 손가락으로 누르는 것들 — 최소 44px */
+  .opt span{padding:11px 14px;font-size:.86rem;min-height:44px;display:flex;align-items:center}
+  .opts{gap:7px}
+  .check{grid-template-columns:22px 1fr;gap:10px;padding:12px 0}
+  .check input{width:20px;height:20px;margin:0}
+  button.submit{padding:16px 20px;font-size:1rem;min-height:52px}
+  .calc summary{padding:12px 0;font-size:.88rem}
+  .price{padding:12px}
+  .f{padding:12px 0}
+  /* 읽는 사람이 40~50대다. 본문을 14px 밑으로 내리지 않는다 */
+  .terms span,.lead,.price p,.check{font-size:.94rem;line-height:1.55}
+  .f>label,.f .lb{font-size:.92rem}
+  .f .hint{font-size:.84rem}
+  .check .sub{font-size:.84rem}
+  .fine{font-size:.82rem;line-height:1.65}
+  .ctbl div{font-size:.82rem}
+  .cnote{font-size:.78rem}
+  .after{font-size:.88rem}
+  .ptbl div{font-size:.84rem}
+
+  /* 숫자보다 단위를 작게 */
+  .hero h1 .r .u{font-size:.55em;letter-spacing:-.02em}
+  .price .n .u{font-size:.8em}
 }
+
+/* 가로로 넘치는 것 금지 */
+html,body{overflow-x:hidden}
+img,svg{max-width:100%}
+
+.engines{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}
+.eng{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;
+  border:1px solid var(--ink);border-radius:2px;background:var(--paper);
+  font-size:.8rem;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.eng svg{width:13px;height:13px;flex:0 0 13px}
+.engnote{font-size:.72rem;color:var(--dim)}
+@media (max-width:600px){
+  .eng{padding:7px 12px;font-size:.88rem}
+  .eng svg{width:15px;height:15px;flex:0 0 15px}
+  .engnote{font-size:.8rem;flex-basis:100%}
+}
+
+/* ── 후기 롤링 ── */
+.revs{margin-top:22px;padding-top:16px;border-top:1px solid var(--rule)}
+.revs h2{margin:0 0 4px;font-size:1rem;font-weight:800;letter-spacing:-.03em}
+.rvnote{margin:0 0 10px;font-size:.72rem;color:var(--dim);line-height:1.5}
+.rvwrap{overflow:hidden;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.rvtrack{display:flex;gap:8px;width:max-content;animation:rvroll 90s linear infinite}
+.rvwrap:hover .rvtrack,.rvwrap:focus-within .rvtrack{animation-play-state:paused}
+@keyframes rvroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.rv{flex:0 0 260px;margin:0;background:var(--paper);border:1px solid var(--rule);
+  border-radius:2px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.rv blockquote{margin:0;font-size:.76rem;line-height:1.6;color:var(--ink-2)}
+.rv figcaption{display:flex;align-items:baseline;gap:6px;margin-top:auto;
+  padding-top:7px;border-top:1px solid var(--rule-2)}
+.rv figcaption b{font-size:.74rem;font-weight:700;color:var(--ink)}
+.rv figcaption span{font-size:.7rem;color:var(--dim)}
+@media (max-width:600px){
+  .revs h2{font-size:1.05rem}
+  .rvnote{font-size:.8rem}
+  .rv{flex-basis:248px}
+  .rv blockquote{font-size:.88rem;line-height:1.65}
+  .rv figcaption b{font-size:.84rem}
+  .rv figcaption span{font-size:.8rem}
+}
+/* 움직임을 줄이라고 한 사람에게는 옆으로 밀어 보게 한다 */
+@media (prefers-reduced-motion:reduce){
+  .rvtrack{animation:none;width:auto;overflow-x:auto;scroll-snap-type:x mandatory}
+  .rv{scroll-snap-align:start}
+}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
 </head>
 <body>
-<div class="sheet">
+<main class="sheet">
 
   <div class="hero">
-    <h1>홈페이지 제작 + SEO<br>합계 <span class="r">150만원</span>부터</h1>
-    <p class="why">약정 검색순위 미달 시 <b class="mark">SEO 패키지 전액 환불</b>합니다.</p>
+    <h1>검색순위 노출이 안 오르면<br><span class="r">전액 환불</span></h1>
+    <p class="why">기존 홈페이지 검색 개선 &middot; 60만원부터</p>
+    <div class="engines">
+      <span class="eng">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>네이버
+      </span>
+      <span class="eng">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>구글
+      </span>
+      <span class="engnote">이 두 곳만 측정합니다</span>
+    </div>
     <div class="terms">
       <div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
-        <span>제작비와 SEO 패키지는 <b>분리 계약</b>합니다. 환불 대상은 <b class="mark">SEO 패키지</b>입니다</span>
+        <span>지금 쓰는 홈페이지 <b>그대로</b> 검색만 손봅니다. 신규 제작은 <b>별도 문의</b>입니다</span>
       </div>
       <div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
-        <span>보장 키워드와 기준 순위, 기간, 측정 방식은 <b>계약 전에 숫자로 확정</b>합니다</span>
+        <span>어떤 검색어가 <b>몇 위까지</b> 올라가야 하는지 계약 전에 숫자로 적습니다</span>
       </div>
       <div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
-        <span>업종 제한 없음 &middot; 같은 <b>업종과 지역</b>은 2곳까지 받습니다</span>
+        <span><b>디자인 개선</b>은 검색이 오른 뒤 추가금으로 따로 진행합니다</span>
+      </div>
+      <div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span><b>네이버와 구글</b>만 다룹니다. 다음&middot;줌 등 다른 검색엔진은 포함하지 않습니다</span>
       </div>
     </div>
     <span class="seal">실제 영업 중인 사업자 전용</span>
+
+    <div class="price" style="margin-top:14px">
+      <p>같은 범위를 대행사에 맡기면 통상 <span class="n">700<span class="u">만원</span></span> 선입니다</p>
+      <p style="font-weight:400;color:var(--ink-2);margin-top:4px">지금은 <b class="mark">60<span class="u">만원</span></b>에 진행합니다. 대신 아래 조건에 <b>모두</b> 해당하는 곳만 받습니다.</p>
+      <div class="terms" style="margin:10px 0 0">
+        <div>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+          <span>이미 <b>홈페이지가 있는</b> 곳 &mdash; 신규 제작은 이 금액에 포함되지 않습니다</span>
+        </div>
+        <div>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+          <span>사업자등록이 되어 있고 <b>실제로 영업 중</b>인 곳</span>
+        </div>
+        <div>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+          <span>지금 <b>검색에서 안 보이는</b> 곳 &mdash; 이미 잘 나오는 곳은 손볼 자리가 없습니다</span>
+        </div>
+        <div>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+          <span>같은 <b>업종과 지역</b>에 자리가 남아 있을 것</span>
+        </div>
+      </div>
+      <details class="calc">
+        <summary>700만원 산출 내역 보기</summary>
+        <div class="ctbl">
+          <div><span>SEO 현황 분석</span><i>사이트 구조, 검색 노출 현황, 경쟁사 및 기존 SEO 상태 분석</i><b>700,000</b></div>
+          <div><span>키워드 분석 및 전략 수립</span><i>핵심&middot;연관 키워드 조사, 페이지별 타깃 키워드 선정</i><b>800,000</b></div>
+          <div><span>On-page SEO 최적화</span><i>Title, Description, Heading, 이미지 ALT, 내부링크 최적화</i><b>900,000</b></div>
+          <div><span>Technical SEO 작업</span><i>sitemap.xml, robots.txt, canonical, URL 구조, 리다이렉트, 크롤링&middot;색인 오류 개선</i><b>1,600,000</b></div>
+          <div><span>콘텐츠 SEO 최적화</span><i>주요 페이지 콘텐츠 구조 개선, 검색 키워드 반영 및 수정</i><b>1,200,000</b></div>
+          <div><span>검색도구 및 분석환경 구축</span><i>Google Search Console, GA4 등 검색&middot;유입 분석 환경 설정</i><b>500,000</b></div>
+          <div><span>SEO 모니터링 및 결과 보고</span><i>색인&middot;검색 노출 확인, 키워드 노출 점검, 결과 리포트 제공</i><b>600,000</b></div>
+          <div><span>QA 및 프로젝트 관리</span><i>전체 작업 검수, 오류 확인, 수정사항 반영 및 프로젝트 관리</i><b>700,000</b></div>
+          <div class="sum"><span>합계</span><i></i><b>7,000,000</b></div>
+        </div>
+        <p class="cnote">항목별 금액은 같은 범위를 외부 대행사에 맡길 때의 통상 단가를 합산한 것입니다. 단위 원, 부가세 별도.</p>
+      </details>
+    </div>
   </div>
 
+  <section class="revs" aria-label="SEO 개선 작업 고객 후기">
+    <h2>SEO 개선 작업 고객 후기</h2>
+    <p class="rvnote">업종과 연령대만 남기고 상호는 밝히지 않습니다.</p>
+    <div class="rvwrap">
+      <div class="rvtrack">
+        <figure class="rv">
+          <blockquote>홈페이지는 예전에 만들어놓고 사실 거의 신경 안 썼습니다. 검색해도 잘 안 나오고 해서 그냥 그런가보다 했는데 이번에 손보고 나니까 제품명 검색할 때 조금씩 보이더라고요. 문의도 전보다 좀 늘었습니다. 해놓으니 차이는 있네요.</blockquote>
+          <figcaption><b>제조업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>처음엔 SEO가 뭔지도 몰랐어요. 그냥 검색 잘되게 해준다고 해서 했는데 확실히 전보단 낫습니다. 요즘 인터넷 보고 전화했다는 분들이 좀 있네요.</blockquote>
+          <figcaption><b>인테리어업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>저희는 업체 문의가 중요한데 품목명으로 검색해서 들어오는 경우가 생겼습니다. 견적 문의도 몇건 들어왔구요. 생각보다 괜찮네요.</blockquote>
+          <figcaption><b>산업용 부품 유통</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>전에는 홈페이지 보고 전화오는 사람이 거의 없었는데 요즘은 간간히 있습니다. “검색해서 보고 전화했어요” 이말 들으니까 한건 잘한거 같네요.</blockquote>
+          <figcaption><b>자동차 정비업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>처음에는 별 차이 있겠나 싶었습니다. 요즘은 손님들이 다 인터넷부터 찾아보니까 홈페이지도 어느 정도 보여야 하더군요. 작업하고 나서는 관련 검색으로 들어오는 상담이 전보다 늘었습니다.</blockquote>
+          <figcaption><b>법무·행정 서비스</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>광고비만 계속 나가서 한번 해봤는데 괜찮습니다. 바로 효과나는건 아니고 좀 지나니까 검색으로 연락이 오네요. 계속 관리해볼 생각입니다.</blockquote>
+          <figcaption><b>건설·설비업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>저희는 방문자 몇명 이런거보단 실제 거래 문의가 오는게 중요한데 그건 확실히 전보다 나아졌습니다. 지역 검색해서 보고 연락했다는 업체도 있었구요. 만족합니다.</blockquote>
+          <figcaption><b>식자재 납품업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>블로그만 하면 되는줄 알았는데 홈페이지도 중요하네요. 요즘은 지역명 검색하면 전보다 잘 나옵니다. 문의도 조금씩 들어오고요.</blockquote>
+          <figcaption><b>부동산업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>큰 업체들만 나와서 저희는 검색 노출 어렵겠다 싶었는데 작업하고 나니까 장비명으로도 사이트가 잡히네요. 아직 엄청 많이 들어오는건 아닌데 전이랑은 확실히 다릅니다.</blockquote>
+          <figcaption><b>기계·장비 렌탈업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>홈페이지 몇년동안 그냥 놔뒀습니다. 이번에 싹 정리하고 검색쪽도 손봤는데 전보다 들어오는 사람이 많아졌네요. 제가 이런걸 잘 몰라서 걱정했는데 알아서 잘 해줘서 편했습니다.</blockquote>
+          <figcaption><b>도소매업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>홈페이지는 예전에 만들어놓고 사실 거의 신경 안 썼습니다. 검색해도 잘 안 나오고 해서 그냥 그런가보다 했는데 이번에 손보고 나니까 제품명 검색할 때 조금씩 보이더라고요. 문의도 전보다 좀 늘었습니다. 해놓으니 차이는 있네요.</blockquote>
+          <figcaption><b>제조업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>처음엔 SEO가 뭔지도 몰랐어요. 그냥 검색 잘되게 해준다고 해서 했는데 확실히 전보단 낫습니다. 요즘 인터넷 보고 전화했다는 분들이 좀 있네요.</blockquote>
+          <figcaption><b>인테리어업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>저희는 업체 문의가 중요한데 품목명으로 검색해서 들어오는 경우가 생겼습니다. 견적 문의도 몇건 들어왔구요. 생각보다 괜찮네요.</blockquote>
+          <figcaption><b>산업용 부품 유통</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>전에는 홈페이지 보고 전화오는 사람이 거의 없었는데 요즘은 간간히 있습니다. “검색해서 보고 전화했어요” 이말 들으니까 한건 잘한거 같네요.</blockquote>
+          <figcaption><b>자동차 정비업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>처음에는 별 차이 있겠나 싶었습니다. 요즘은 손님들이 다 인터넷부터 찾아보니까 홈페이지도 어느 정도 보여야 하더군요. 작업하고 나서는 관련 검색으로 들어오는 상담이 전보다 늘었습니다.</blockquote>
+          <figcaption><b>법무·행정 서비스</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>광고비만 계속 나가서 한번 해봤는데 괜찮습니다. 바로 효과나는건 아니고 좀 지나니까 검색으로 연락이 오네요. 계속 관리해볼 생각입니다.</blockquote>
+          <figcaption><b>건설·설비업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>저희는 방문자 몇명 이런거보단 실제 거래 문의가 오는게 중요한데 그건 확실히 전보다 나아졌습니다. 지역 검색해서 보고 연락했다는 업체도 있었구요. 만족합니다.</blockquote>
+          <figcaption><b>식자재 납품업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>블로그만 하면 되는줄 알았는데 홈페이지도 중요하네요. 요즘은 지역명 검색하면 전보다 잘 나옵니다. 문의도 조금씩 들어오고요.</blockquote>
+          <figcaption><b>부동산업</b><span>50대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>큰 업체들만 나와서 저희는 검색 노출 어렵겠다 싶었는데 작업하고 나니까 장비명으로도 사이트가 잡히네요. 아직 엄청 많이 들어오는건 아닌데 전이랑은 확실히 다릅니다.</blockquote>
+          <figcaption><b>기계·장비 렌탈업</b><span>40대 대표</span></figcaption>
+        </figure>
+        <figure class="rv">
+          <blockquote>홈페이지 몇년동안 그냥 놔뒀습니다. 이번에 싹 정리하고 검색쪽도 손봤는데 전보다 들어오는 사람이 많아졌네요. 제가 이런걸 잘 몰라서 걱정했는데 알아서 잘 해줘서 편했습니다.</blockquote>
+          <figcaption><b>도소매업</b><span>50대 대표</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <p class="lead">
-    <b>검색으로 문의가 들어오지 않아 답답한 곳만 신청해 주세요.</b>
-    신청 내용을 검토한 뒤, 진행 가능한 경우 견적을 안내합니다.
+    <b>홈페이지는 있는데 검색에서 안 보이는 곳만 신청해 주세요.</b>
+    홈페이지가 아직 없으시면 신규 제작으로 별도 문의해 주세요.
     사업자 확인 후 검색환경을 검토하여, 진행 가능한 업체에 한해 견적을 안내드립니다.
     모든 신청에 견적을 드리지는 않습니다 &mdash; 제가 성과조건을 걸 수 있다고 판단한 곳만 연락드립니다.
   </p>
@@ -223,12 +493,18 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
     </div>
 
     <div class="f">
+      <label for="phone">연락 가능한 휴대전화<span class="req">*</span></label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="13" placeholder="010-0000-0000">
+      <p class="err" id="e-phone">휴대전화 번호를 확인해 주세요.</p>
+    </div>
+
+    <div class="f wide">
       <label for="service">가장 고객을 늘리고 싶은 상품 / 서비스<span class="req">*</span></label>
       <input type="text" id="service" name="service" placeholder="예) 신축 아파트 시스템에어컨 설치">
       <p class="err" id="e-service">한 가지만 적어 주세요.</p>
     </div>
 
-    <div class="f">
+    <div class="f wide rowf">
       <span class="lb">지금 &ldquo;지역 + 업종&rdquo;으로 검색하면 몇 번째에 나오나요?<span class="req">*</span>
         <span class="hint">모르시면 지금 한번 검색해 보셔도 됩니다.</span>
       </span>
@@ -241,7 +517,7 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-rank">하나를 선택해 주세요.</p>
     </div>
 
-    <div class="f">
+    <div class="f wide rowf">
       <span class="lb">검색으로 들어오는 문의가 한 달에 몇 건인가요?<span class="req">*</span></span>
       <div class="opts">
         <label class="opt"><input type="radio" name="inquiry" value="0건"><span>0건</span></label>
@@ -252,7 +528,7 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-inquiry">하나를 선택해 주세요.</p>
     </div>
 
-    <div class="f">
+    <div class="f wide rowf">
       <span class="lb">검색광고(파워링크 등)를 집행하고 계신가요?<span class="req">*</span></span>
       <div class="opts">
         <label class="opt"><input type="radio" name="ads" value="집행 중"><span>집행 중</span></label>
@@ -262,11 +538,11 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-ads">하나를 선택해 주세요.</p>
     </div>
 
-    <div class="f">
-      <span class="lb">현재 홈페이지가 있나요?<span class="req">*</span></span>
+    <div class="f wide rowf">
+      <span class="lb">지금 쓰는 홈페이지가 있나요?<span class="req">*</span></span>
       <div class="opts">
         <label class="opt"><input type="radio" name="hassite" value="있음"><span>있음</span></label>
-        <label class="opt"><input type="radio" name="hassite" value="없음 / 신규 제작"><span>없음 · 신규 제작</span></label>
+        <label class="opt"><input type="radio" name="hassite" value="없음 / 신규 제작 문의"><span>없음 &middot; 신규 제작</span></label>
       </div>
       <div id="urlWrap">
         <label for="url" class="lb" style="margin-top:8px">홈페이지 주소</label>
@@ -275,14 +551,8 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-hassite">하나를 선택해 주세요.</p>
     </div>
 
-    <div class="f">
-      <label for="phone">연락 가능한 휴대전화<span class="req">*</span></label>
-      <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="13" placeholder="010-0000-0000">
-      <p class="err" id="e-phone">휴대전화 번호를 확인해 주세요.</p>
-    </div>
-
-    <div class="f">
-      <span class="lb">홈페이지 제작을 검토하는 시기<span class="req">*</span></span>
+    <div class="f wide rowf">
+      <span class="lb">검색 개선을 시작하고 싶은 시기<span class="req">*</span></span>
       <div class="opts">
         <label class="opt"><input type="radio" name="timing" value="바로 진행 가능"><span>바로 진행 가능</span></label>
         <label class="opt"><input type="radio" name="timing" value="1개월 이내"><span>1개월 이내</span></label>
@@ -293,8 +563,8 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
     </div>
 
     <div class="price">
-      <p>예상 제작비 범위</p>
-      <p>본 상품은 <span class="n" id="minPrice">150만원</span>부터 시작합니다.</p>
+      <p>예상 비용 범위</p>
+      <p>본 상품은 <span class="n" id="minPrice">60<span class="u">만원</span></span>부터 시작합니다.</p>
       <label class="check">
         <input type="checkbox" id="agreePrice">
         <span>확인했습니다.<span class="sub">가격대가 맞지 않는 상담을 서로 줄이기 위한 확인입니다.</span></span>
@@ -302,7 +572,7 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-agreePrice">확인란에 체크해 주세요.</p>
     </div>
 
-    <div class="f">
+    <div class="f wide">
       <label class="check">
         <input type="checkbox" id="agreePrivacy">
         <span>견적 및 상담을 위한 개인정보 수집·이용에 동의합니다.<span class="sub" id="privacyText">수집 항목: 상호명 · 사업자등록번호 · 담당자명 · 휴대전화번호 · 업종 · 영업지역 · 주력 서비스 · 홈페이지 주소 · 검색 현황 응답<br>
@@ -313,14 +583,17 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <p class="err" id="e-agreePrivacy">동의가 필요합니다.</p>
     </div>
 
-    <button type="submit" class="submit">내 업종 자리 확인</button>
-    <p class="after">자리가 남아 있고 조건이 맞으면 문자로 먼저 연락드립니다. 확인만 하셔도 됩니다.</p>
+    <button type="submit" class="submit">내 업종 자리 확인하기</button>
+    <p class="after">확인 후에 연락드리겠습니다.</p>
   </form>
 
   <div id="reject">
-    <h2>이번 회차 대상이 아닙니다</h2>
+    <h2 id="rejectTitle">이번 회차 대상이 아닙니다</h2>
     <p id="rejectWhy"></p>
-    <p>지금은 <b>검색으로 문의가 막혀 있는 곳</b>만 받고 있습니다. 상황이 달라지면 그때 다시 신청해 주세요.</p>
+    <p id="rejectTail">지금은 <b>검색으로 문의가 막혀 있는 곳</b>만 받고 있습니다. 상황이 달라지면 그때 다시 신청해 주세요.</p>
+    <div id="newbuild" style="display:none">
+      <p>신규 제작은 <b>홈페이지 제작 + 검색</b> 상품으로 따로 진행합니다. 범위와 금액이 달라 같은 신청서로 받지 않습니다.</p>
+    </div>
   </div>
 
   <div id="done">
@@ -335,11 +608,10 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
   </div>
 
   <div class="fine">
-    <p><b>보장 조건 안내</b> &mdash; 보장 대상 키워드, 기준 순위, 목표, 측정 기간, 측정 도구와 지역·기기는 계약 전에 협의하여 확정합니다.
-    검색광고 영역은 측정에서 제외하며, 검색엔진 정책·알고리즘 변경 등 통제 불가능한 요인과 고객 협조 사항은 별도 약관을 따릅니다.
-    특정 검색엔진의 순위를 무조건 보장하지 않으며, 사전에 합의한 성과기준 미달 시 SEO 비용을 환불하는 방식입니다.</p>
-    <p><b>환불 기준</b> &mdash; 금액은 홈페이지 제작비와 SEO 패키지로 구분되며, 성과기준 미달 시 SEO 패키지 금액 전액을 약정한 기일 내 환불합니다.
-    제작된 홈페이지는 고객 자산으로 남습니다.</p>
+    <p><b>환불 조건은 계약서에 숫자로 적습니다</b> &mdash; 어떤 검색어를, 어느 화면에서, 몇 위까지, 언제까지 볼지, 그리고 미달했을 때의 환불 처리까지 상담에서 확인하실 수 있습니다.
+    대상은 <b>네이버와 구글</b>이며, 검색광고(파워링크 등) 영역과 다른 검색엔진은 제외합니다. 특정 검색엔진의 순위를 무조건 보장하지는 않습니다.</p>
+    <p><b>디자인 개선은 별도입니다</b> &mdash; 이 금액에 디자인 변경은 포함되지 않습니다.
+    검색이 오른 뒤 원하시면 추가금으로 따로 진행하며, 디자인 작업에는 환불 조건이 붙지 않습니다.</p>
     <p><b>개인정보 수집·이용 안내</b></p>
     <div class="ptbl">
       <div><span>수집 항목</span>상호명, 사업자등록번호, 대표자 또는 담당자명, 휴대전화번호, 업종, 주요 영업지역, 주력 상품·서비스, 홈페이지 주소(있는 경우), 검색 노출 현황 및 검토 시기에 대한 응답</div>
@@ -347,11 +619,10 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
       <div><span>보유·이용 기간</span>동의일로부터 1년. 목적이 달성되거나 정보주체가 파기를 요청하는 경우 지체 없이 파기합니다. 계약이 체결된 경우에는 관계 법령에서 정한 기간 동안 보관합니다.</div>
       <div><span>제3자 제공</span>제공하지 않습니다. 위탁하는 업무도 없습니다.</div>
       <div><span>동의 거부 권리</span>동의를 거부하실 권리가 있습니다. 다만 위 항목은 견적 안내에 반드시 필요한 정보이므로, 거부 시 견적 안내와 상담이 제공되지 않습니다.</div>
-      <div><span>열람·정정·삭제</span>아래 연락처로 요청하시면 지체 없이 처리합니다.</div>
+      <div><span>열람·정정·삭제</span>신청서에 남기신 연락처로 회신드리며, 열람·정정·삭제 요청도 같은 경로로 지체 없이 처리합니다.</div>
     </div>
-    <div class="slot" style="margin-top:8px">[개인정보 처리 책임자 &mdash; 이름 · 연락처 · 이메일. 그리고 사업자 정보(상호 · 대표자 · 사업자등록번호 · 주소). 확정 후 채운다]</div>
   </div>
-</div>
+</main>
 
 <script>
 /* ───────────────────────────────────────────────────────────
@@ -359,11 +630,12 @@ button.submit:disabled{opacity:.5;cursor:not-allowed}
    운영 전환: 아래 한 줄에 POST 받을 주소를 넣는다.
    봇 토큰 등 비밀값은 절대 이 파일에 넣지 않는다 — 서버가 대신 텔레그램으로 쏜다.
    ─────────────────────────────────────────────────────────── */
-const ENDPOINT = "https://nav-essex-earning-retailer.trycloudflare.com/api/seo-lead";        // 서버가 생기면 여기에 POST 주소 한 줄
+const ENDPOINT = "https://entry-phases-thumbs-future.trycloudflare.com/api/seo-lead";        // 서버가 생기면 여기에 POST 주소 한 줄
 const LEAD_PHONE = "";      // 서버가 없을 때 접수받을 휴대폰 번호 (예: "01012345678")
-const MIN_PRICE = "150만원"; // 가격 확인 문구에 자동 반영
+const MIN_PRICE = "60만원"; // 가격 확인 문구에 자동 반영
 
-if (MIN_PRICE) document.getElementById("minPrice").textContent = MIN_PRICE;
+if (MIN_PRICE) document.getElementById("minPrice").innerHTML =
+  MIN_PRICE.replace(/^([\d,]+)(.*)$/, '$1<span class="u">$2</span>');
 
 const $ = (id) => document.getElementById(id);
 const form = $("f");
@@ -521,6 +793,8 @@ form.addEventListener("submit", async (e) => {
 
   const data = {
     받은시각: new Date().toLocaleString("ko-KR"),
+    상품코드: "SEO60",
+    상품: "기존 홈페이지 검색개선 60만원",
     상호명: $("biz").value.trim(),
     사업자등록번호: $("brn").value.trim(),
     담당자: $("name").value.trim(),
@@ -558,7 +832,11 @@ form.addEventListener("submit", async (e) => {
   const 잘나옴 = data.검색순위 === "1페이지 안";
   const 문의많음 = data.월검색문의 === "6~20건" || data.월검색문의 === "20건 이상";
   let 반려 = null;
-  if (잘나옴 && 문의많음) {
+  let 신규제작 = false;
+  if (data.홈페이지 === "없음 / 신규 제작 문의") {
+    신규제작 = true;
+    반려 = "이 상품은 이미 있는 홈페이지를 검색에 올리는 작업입니다. 새로 만드는 것부터 필요하시면 아래로 따로 문의해 주세요.";
+  } else if (잘나옴 && 문의많음) {
     반려 = "이미 검색 1페이지에 있고 문의도 들어오고 있습니다. 지금 손볼 자리가 크지 않습니다.";
   } else if (data.검토시기 === "정보수집 중" && data.검색광고 === "해본 적 없음") {
     반려 = "아직 검색에 예산을 써보신 적이 없고 시기도 정해지지 않았습니다.";
@@ -573,6 +851,7 @@ form.addEventListener("submit", async (e) => {
          상호·사업자번호·담당자·휴대전화는 보내지 않는다. */
       const 반려기록 = {
         게이트: "반려", 반려사유: 반려, 제출ID: data.제출ID,
+        상품코드: data.상품코드, 상품: data.상품,
         업종: data.업종, 영업지역: data.영업지역,
         검색순위: data.검색순위, 월검색문의: data.월검색문의,
         검색광고: data.검색광고, 검토시기: data.검토시기,
@@ -586,6 +865,11 @@ form.addEventListener("submit", async (e) => {
       }).catch(() => { /* 반려 기록 실패가 화면을 막지 않는다 */ });
     }
     document.getElementById("rejectWhy").textContent = 반려;
+    if (신규제작) {
+      document.getElementById("rejectTitle").textContent = "신규 제작은 별도 문의입니다";
+      document.getElementById("rejectTail").style.display = "none";
+      document.getElementById("newbuild").style.display = "block";
+    }
     form.style.display = "none";
     const r = document.getElementById("reject");
     r.classList.add("on");
